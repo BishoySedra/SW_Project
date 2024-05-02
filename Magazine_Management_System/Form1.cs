@@ -21,6 +21,8 @@ namespace Magazine_Management_System
         {
             InitializeComponent();
             
+            UserRepository userRepository = new UserRepository();
+            userRepository.SaveUser(new User())
 
         }
 

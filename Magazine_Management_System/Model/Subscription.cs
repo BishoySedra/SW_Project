@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.DataAccess.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Magazine_Management_System.Model
     {
         public int Reader_Id;
         public int Magazine_Id;
-        public DateTime StartDate;
-        public DateTime EndDate;
+        public OracleDate StartDate;
+        public OracleDate EndDate;
     }
 }
