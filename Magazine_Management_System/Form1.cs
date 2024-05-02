@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Magazine_Management_System.Repository.MagazineRepository;
 using Oracle.DataAccess.Types;
+using Magazine_Management_System.Repository.ArticleRepository;
 
 namespace Magazine_Management_System
 {
@@ -21,10 +22,17 @@ namespace Magazine_Management_System
         {
             InitializeComponent();
             
-            UserRepository userRepository = new UserRepository();
-            userRepository.SaveUser(new User())
 
         }
+        ArticleRepository articleRepository = new ArticleRepository();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            articleRepository.SearchPendingArticlesDisconnectedLayer(dataGridView1);
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            articleRepository.UpdateMagazineArticlesDisconnectedLayer();
+        }
     }
 }

@@ -7,6 +7,8 @@ using Magazine_Management_System.Model;
 using Oracle.DataAccess.Client;
 using System.Data;
 using Oracle.DataAccess.Types;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Magazine_Management_System.Repository.ArticleRepository
 {
@@ -14,7 +16,9 @@ namespace Magazine_Management_System.Repository.ArticleRepository
     {
         //make crud operations for articles like save, update, delete, get all articles, get article by id
 
-
+        OracleDataAdapter adapter;
+        OracleCommandBuilder oracleCommandBuilder;
+        DataSet dataSet ;
         public ArticleRepository() { }
 
         //save article
@@ -81,27 +85,57 @@ namespace Magazine_Management_System.Repository.ArticleRepository
             }
         }
 
+
+        public void SearchPendingArticlesDisconnectedLayer(DataGridView dataGridView)
+        {
+            string connString = this.ordb;
+            string cmdStr = "SELECT * FROM ARTICLES WHERE STATUS = 'PENDING'";
+
+            try
+            {
+                adapter = new OracleDataAdapter(cmdStr,connString);
+                dataSet = new DataSet();
+                adapter.Fill(dataSet);
+                dataGridView.DataSource = dataSet.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void UpdateMagazineArticlesDisconnectedLayer()
+        {
+            oracleCommandBuilder = new OracleCommandBuilder(adapter);
+            adapter.Update(dataSet.Tables[0]);
+        }
+
         //get article by id
         public Article GetArticle(int ID)
         {
             OracleCommand command = new OracleCommand();
             try
             {
+                //get the article by ID
                 command.Connection = this.conn;
-                command.CommandText = "SELECT * FROM Articles WHERE ID = :ID";
+                command.CommandText = "SELECT * FROM articles WHERE ID = :ID";
                 command.CommandType = CommandType.Text;
                 command.Parameters.Add("ID", ID);
                 OracleDataReader reader = command.ExecuteReader();
+                //check if there are values inside reader or not
                 if (reader.HasRows == false)
                 {
                     return null;
                 }
+
+
                 reader.Read();
                 Article article = new Article();
                 article.Id = Convert.ToInt32(reader["ID"]);
                 article.Title = reader["Title"].ToString();
                 article.Content = reader["Content"].ToString();
-                article.Magazine_Id = Convert.ToInt32(reader["Magazine_Id"]);
+                article.Magazine_Id = Convert.ToInt32(reader["Magazine_ID"]);
+                article.Category_Id = Convert.ToInt32(reader["Category_ID"]);
+                article.Status = reader["Status"].ToString();
                 return article;
             }
             catch (Exception ex)
