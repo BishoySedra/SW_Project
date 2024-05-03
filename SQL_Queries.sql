@@ -371,3 +371,65 @@ BEGIN
     WHERE reader_id = reader_id_in AND magazine_id = magazine_id_in;
 END get_subscription;
 /
+
+
+
+-------------------------------
+---------- USER SHIT ----------
+-------------------------------
+
+-- Create procedure for inserting a new user
+CREATE OR REPLACE PROCEDURE insert_user(
+    email_in IN VARCHAR2,
+    username_in IN VARCHAR2,
+    password_in IN VARCHAR2,
+    role_in IN VARCHAR2
+) AS
+BEGIN
+    INSERT INTO USERS (email, username, password, role)
+    VALUES (email_in, username_in, password_in, role_in);
+    COMMIT;
+END insert_user;
+/
+
+-- Create procedure for updating user information
+CREATE OR REPLACE PROCEDURE update_user(
+    id_in IN NUMBER,
+    email_in IN VARCHAR2,
+    username_in IN VARCHAR2,
+    password_in IN VARCHAR2,
+    role_in IN VARCHAR2
+) AS
+BEGIN
+    UPDATE USERS
+    SET email = email_in,
+        username = username_in,
+        password = password_in,
+        role = role_in
+    WHERE id = id_in;
+    COMMIT;
+END update_user;
+/
+
+-- Create procedure for deleting a user
+CREATE OR REPLACE PROCEDURE delete_user(
+    id_in IN NUMBER
+) AS
+BEGIN
+    DELETE FROM USERS
+    WHERE id = id_in;
+    COMMIT;
+END delete_user;
+/
+
+-- Create procedure for retrieving user information
+CREATE OR REPLACE PROCEDURE get_user(
+    id_in IN NUMBER,
+    user_out OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN user_out FOR
+    SELECT * FROM USERS
+    WHERE id = id_in;
+END get_user;
+/
