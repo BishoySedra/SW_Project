@@ -16,8 +16,9 @@ namespace Magazine_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            Application.Run(new Form2());
+            Application.Run(new AdminForm());
+            Application.Run(new RegisterForm());
+            Application.Run(new Report1());
         }
     }
 }

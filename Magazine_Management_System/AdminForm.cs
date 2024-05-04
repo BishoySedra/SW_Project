@@ -16,9 +16,9 @@ using Magazine_Management_System.Repository.ArticleRepository;
 
 namespace Magazine_Management_System
 {
-    public partial class Form1 : Form
+    public partial class AdminForm : Form
     {
-        public Form1()
+        public AdminForm()
         {
             InitializeComponent();
             

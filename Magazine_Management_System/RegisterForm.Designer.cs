@@ -1,7 +1,7 @@
 ﻿
 namespace Magazine_Management_System
 {
-    partial class Form2
+    partial class RegisterForm
     {
         /// <summary>
         /// Required designer variable.

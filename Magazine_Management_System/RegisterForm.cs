@@ -12,9 +12,9 @@ using Magazine_Management_System.Model;
 
 namespace Magazine_Management_System
 {
-    public partial class Form2 : Form
+    public partial class RegisterForm : Form
     {
-        public Form2()
+        public RegisterForm()
         {
             InitializeComponent();
         }
