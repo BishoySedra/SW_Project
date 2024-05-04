@@ -61,6 +61,7 @@ CREATE TABLE SUBSCRIPTIONS (
     magazine_id NUMBER,
     start_date DATE,
     end_date DATE,
+    price NUMBER,
     PRIMARY KEY (reader_id, magazine_id),
     FOREIGN KEY (reader_id) REFERENCES USERS(id),
     FOREIGN KEY (magazine_id) REFERENCES MAGAZINES(id)
@@ -322,11 +323,12 @@ CREATE OR REPLACE PROCEDURE insert_subscription(
     reader_id_in IN NUMBER,
     magazine_id_in IN NUMBER,
     start_date_in IN DATE,
-    end_date_in IN DATE
+    end_date_in IN DATE,
+    price_in IN NUMBER
 ) AS
 BEGIN
-    INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
-    VALUES (reader_id_in, magazine_id_in, start_date_in, end_date_in);
+    INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date, price)
+    VALUES (reader_id_in, magazine_id_in, start_date_in, end_date_in, price_in);
     COMMIT;
 END insert_subscription;
 /
@@ -336,12 +338,14 @@ CREATE OR REPLACE PROCEDURE update_subscription(
     reader_id_in IN NUMBER,
     magazine_id_in IN NUMBER,
     start_date_in IN DATE,
-    end_date_in IN DATE
+    end_date_in IN DATE,
+    price_in IN NUMBER
 ) AS
 BEGIN
     UPDATE SUBSCRIPTIONS
     SET start_date = start_date_in,
-        end_date = end_date_in
+        end_date = end_date_in, 
+        price = price_in
     WHERE reader_id = reader_id_in AND magazine_id = magazine_id_in;
     COMMIT;
 END update_subscription;
