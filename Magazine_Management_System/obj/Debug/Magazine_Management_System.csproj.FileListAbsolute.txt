@@ -3,7 +3,6 @@ E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Magazine
 E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.pdb
 E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Oracle.DataAccess.dll
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.AssemblyReference.cache
-E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form1.resources
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Properties.Resources.resources
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.GenerateResource.cache
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CoreCompileInputs.cache
@@ -21,3 +20,6 @@ Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.cs
 Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
 Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
 Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form2.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Login.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.AdminForm.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.RegisterForm.resources
