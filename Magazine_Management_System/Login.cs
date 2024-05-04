@@ -37,7 +37,8 @@ namespace Magazine_Management_System
                 }
                 else if (user.Role.Equals("AUTHOR"))
                 {
-
+                    AuthorForm form = new AuthorForm(user.Id);
+                    form.Show();
                 }
             }
             else

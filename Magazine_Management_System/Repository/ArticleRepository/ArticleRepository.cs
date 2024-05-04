@@ -22,41 +22,31 @@ namespace Magazine_Management_System.Repository.ArticleRepository
         public ArticleRepository() { }
 
         //save article
-        public int SaveArticle(string Title, string Content, int Magazine_Id)
+        public int SaveArticle(string Title, string Content, int Magazine_Id,int Category_Id,int Author_Id,string status)
         {
+
+            //write the article with the above stuff
             OracleCommand command = new OracleCommand();
             try
             {
                 command.Connection = this.conn;
-                command.CommandText = "INSERT INTO Articles (Title,Content,Magazine_Id) VALUES (:Title,:Content,:Magazine_Id)";
+                command.CommandText = "INSERT INTO Articles (Title, Content, Magazine_ID, Author_ID, Category_ID,Status) VALUES (:Title, :Content, :Magazine_ID, :Author_ID, :Category_ID,:Status)";
                 command.CommandType = CommandType.Text;
                 command.Parameters.Add("Title", Title);
                 command.Parameters.Add("Content", Content);
-                command.Parameters.Add("Magazine_Id", Magazine_Id);
+                command.Parameters.Add("Magazine_ID", Magazine_Id);
+                command.Parameters.Add("Author_ID", Author_Id);
+                command.Parameters.Add("Category_ID", Category_Id);
+                command.Parameters.Add("Status", status);
                 int AffectedRows = command.ExecuteNonQuery();
-
                 if (AffectedRows == 0)
                     return -1;
-                //if the article is saved successfully return the ID of the article
-                command.CommandText = "SELECT ID FROM Articles WHERE Title = :Title";
-                command.CommandType = CommandType.Text;
-                command.Parameters.Clear();
-                command.Parameters.Add("Title", Title);
-                OracleDataReader reader = command.ExecuteReader();
-                if (reader.HasRows == false)
-                {
-                    return -1;
-                }
-                //return the ID of the article
-                reader.Read();
-                int ID = Convert.ToInt32(reader[0]);
-                return ID;
+                return 1;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return -1;
-
             }
 
         }
