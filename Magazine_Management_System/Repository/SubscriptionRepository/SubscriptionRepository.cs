@@ -32,21 +32,8 @@ namespace Magazine_Management_System.Repository.SubscriptionRepository
 
                 if (AffectedRows == 0)
                     return -1;
-                //if the magazine is saved successfully return the ID of the magazine
-                command.CommandText = "SELECT ID FROM Subscriptions WHERE Reader_Id = :Reader_Id AND Magazine_Id = :Magazine_Id";
-                command.CommandType = CommandType.Text;
-                command.Parameters.Clear();
-                command.Parameters.Add("Reader_Id", Reader_Id);
-                command.Parameters.Add("Magazine_Id", Magazine_Id);
-                OracleDataReader reader = command.ExecuteReader();
-                if (reader.HasRows == false)
-                {
-                    return -1;
-                }
-                //return the ID of the magazine
-                reader.Read();
-                int ID = Convert.ToInt32(reader[0]);
-                return ID;
+               
+                return Magazine_Id;
             }
             catch (Exception ex)
             {
@@ -112,6 +99,94 @@ namespace Magazine_Management_System.Repository.SubscriptionRepository
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        public List<Magazine> GetAllMagazinesNotSubscribedTo(int ReaderID)
+        {
+            //get all magazines that the reader is not subscribed to using stored procedure called get_all_other_magazines
+            OracleCommand command = new OracleCommand();
+            try
+            {
+                command.Connection = this.conn;
+                command.CommandText = "get_all_other_magazines";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("ReaderID", ReaderID);
+                command.Parameters.Add("Magazines", OracleDbType.RefCursor, ParameterDirection.Output);
+                OracleDataReader reader = command.ExecuteReader();
+                List<Magazine> magazines = new List<Magazine>();
+                while (reader.Read())
+                {
+                    Magazine magazine = new Magazine();
+                    magazine.Id = Convert.ToInt32(reader["ID"]);
+                    magazine.Name = reader["Name"].ToString();
+                    magazines.Add(magazine);
+                }
+                return magazines;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public List<Magazine> GetAllMagazinesSubscribedTo(int ReaderID)
+        {
+            //get all magazines that the reader is not subscribed to using stored procedure called get_all_other_magazines
+            OracleCommand command = new OracleCommand();
+            try
+            {
+                command.Connection = this.conn;
+                command.CommandText = "get_all_my_magazines";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("ReaderID", ReaderID);
+                command.Parameters.Add("Magazines", OracleDbType.RefCursor, ParameterDirection.Output);
+                OracleDataReader reader = command.ExecuteReader();
+                List<Magazine> magazines = new List<Magazine>();
+                while (reader.Read())
+                {
+                    Magazine magazine = new Magazine();
+                    magazine.Id = Convert.ToInt32(reader["ID"]);
+                    magazine.Name = reader["Name"].ToString();
+                    magazines.Add(magazine);
+                }
+                return magazines;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public List<Article> GetArticlesOfYourSubscriptionMagazines(int ReaderID)
+        {
+            //get the user articles by calling a stored procedure called get_all_my_magazines_articles
+            OracleCommand command = new OracleCommand();
+            try
+            {
+                command.Connection = this.conn;
+                command.CommandText = "get_all_my_magazines_articles";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("ReaderID", ReaderID);
+                command.Parameters.Add("Articles", OracleDbType.RefCursor, ParameterDirection.Output);
+                OracleDataReader reader = command.ExecuteReader();
+                List<Article> articles = new List<Article>();
+                while (reader.Read())
+                {
+                    Article article = new Article();
+                    article.Id = Convert.ToInt32(reader["ID"]);
+                    article.Title = reader["Title"].ToString();
+                    article.Content = reader["Content"].ToString();
+                    articles.Add(article);
+                }
+                return articles;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
         }
 
         //delete subscription by id

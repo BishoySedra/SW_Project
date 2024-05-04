@@ -40,6 +40,15 @@ namespace Magazine_Management_System
                     AuthorForm form = new AuthorForm(user.Id);
                     form.Show();
                 }
+                else if(user.Role.Equals("READER"))
+                {
+                    SubscriptionForm form = new SubscriptionForm(user.Id);
+                    form.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Login Failed");
+                }
             }
             else
                 MessageBox.Show("Login Failed");
