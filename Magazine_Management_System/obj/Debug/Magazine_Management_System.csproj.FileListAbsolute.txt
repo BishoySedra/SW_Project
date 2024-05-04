@@ -10,3 +10,14 @@ E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CopyComplete
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
 E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe.config
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.AssemblyReference.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form1.resources
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Properties.Resources.resources
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.GenerateResource.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CoreCompileInputs.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form2.resources

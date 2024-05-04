@@ -433,3 +433,128 @@ BEGIN
     WHERE id = id_in;
 END get_user;
 /
+
+
+--------------------------
+----- INSERTING SHIT -----
+--------------------------
+
+-- Inserting users
+INSERT INTO "USERS" (email, username, password, role)
+VALUES ('admin@example.com', 'admin_user', 'adminpass', 'ADMIN');
+
+INSERT INTO "USERS" (email, username, password, role)
+VALUES ('author1@example.com', 'author_one', 'authorpass', 'AUTHOR');
+
+INSERT INTO "USERS" (email, username, password, role)
+VALUES ('reader1@example.com', 'reader_one', 'readerpass', 'READER');
+
+INSERT INTO USERS (email, username, password, role)
+VALUES ('author2@example.com', 'author_two', 'authorpass', 'AUTHOR');
+
+INSERT INTO USERS (email, username, password, role)
+VALUES ('reader2@example.com', 'reader_two', 'readerpass', 'READER');
+
+
+
+-- Inserting categories
+INSERT INTO CATEGORIES (name)
+VALUES ('Technology');
+
+INSERT INTO CATEGORIES (name)
+VALUES ('Science');
+
+INSERT INTO CATEGORIES (name)
+VALUES ('Fashion');
+
+INSERT INTO CATEGORIES (name)
+VALUES ('Health');
+
+INSERT INTO CATEGORIES (name)
+VALUES ('Travel');
+
+
+-- Inserting articles
+DECLARE
+    v_title VARCHAR2(255) := 'New Trends in Technology';
+    v_magazine_id NUMBER := 1; -- Assuming the magazine ID where the article belongs
+    v_author_id NUMBER := 2;   -- Assuming the author ID who wrote the article
+    v_category_id NUMBER := 1; -- Assuming the category ID of the article
+    v_content VARCHAR2(4000) := 'This article explores emerging trends in technology.';
+BEGIN
+    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
+    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
+END;
+/
+
+DECLARE
+    v_title VARCHAR2(255) := 'Space Exploration: The Next Frontier';
+    v_magazine_id NUMBER := 2; -- Assuming the magazine ID where the article belongs
+    v_author_id NUMBER := 2;   -- Assuming the author ID who wrote the article
+    v_category_id NUMBER := 2; -- Assuming the category ID of the article
+    v_content VARCHAR2(4000) := 'This article delves into the future of space exploration.';
+BEGIN
+    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
+    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
+END;
+/
+
+DECLARE
+    v_title VARCHAR2(255) := 'Healthy Eating Habits';
+    v_magazine_id NUMBER := 1; -- Assuming the magazine ID where the article belongs
+    v_author_id NUMBER := 7;   -- Assuming the author ID who wrote the article
+    v_category_id NUMBER := 4; -- Assuming the category ID of the article
+    v_content VARCHAR2(4000) := 'This article discusses the importance of healthy eating.';
+BEGIN
+    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
+    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
+END;
+/
+
+
+-- Inserting magazines
+INSERT INTO MAGAZINES (name, admin_id, publication_date)
+VALUES ('Tech Insider', 1, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+
+INSERT INTO MAGAZINES (name, admin_id, publication_date)
+VALUES ('Science Today', 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+
+INSERT INTO MAGAZINES (name, admin_id, publication_date)
+VALUES ('Health and Wellness', 1, TO_DATE('2024-04-15', 'YYYY-MM-DD'));
+
+INSERT INTO MAGAZINES (name, admin_id, publication_date)
+VALUES ('Travel Journal', 1, TO_DATE('2024-05-10', 'YYYY-MM-DD'));
+
+
+-- Linking articles to magazines
+INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
+VALUES (1, 1);
+
+INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
+VALUES (1, 2);
+
+INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
+VALUES (4, 3);
+
+
+-- Inserting subscriptions
+INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
+VALUES (3, 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
+
+
+INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
+VALUES (8, 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
+
+INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
+VALUES (6, 2, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
+
+

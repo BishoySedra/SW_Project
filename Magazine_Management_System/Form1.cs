@@ -34,5 +34,10 @@ namespace Magazine_Management_System
         {
             articleRepository.UpdateMagazineArticlesDisconnectedLayer();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

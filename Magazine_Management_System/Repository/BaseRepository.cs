@@ -12,7 +12,7 @@ namespace Magazine_Management_System.Repository
 {
     internal abstract class BaseRepository
     {
-        protected string ordb = "Data source=orcl;User Id=hr;   Password = hr; ";
+        protected string ordb = "Data source=orcl;User Id=scott;   Password = tiger; ";
 
         protected OracleConnection conn;
 
