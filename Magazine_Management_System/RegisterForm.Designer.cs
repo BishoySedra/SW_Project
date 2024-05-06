@@ -1,4 +1,4 @@
-﻿
+
 namespace Magazine_Management_System
 {
     partial class RegisterForm
@@ -161,4 +161,5 @@ namespace Magazine_Management_System
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox role_cmb;
     }
+
 }

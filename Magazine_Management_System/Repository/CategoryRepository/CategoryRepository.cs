@@ -71,6 +71,25 @@ namespace Magazine_Management_System.Repository.CategoryRepository
             }
         }
 
+        public List<Category> GetAllCategories()
+        {
+            //stored procedure to get all categories cursor
+            OracleCommand command = new OracleCommand();
+            command.Connection = this.conn;
+
+            command.CommandText = "get_all_categories";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("Categories", OracleDbType.RefCursor, ParameterDirection.Output);
+            OracleDataReader reader = command.ExecuteReader();
+            List<Category> categories = new List<Category>();
+            while (reader.Read())
+            {
+                Category category = new Category(Convert.ToInt32(reader["ID"]), reader["Name"].ToString());
+                categories.Add(category);
+            }
+            return categories;
+        }
+
         public bool UpdateCategory(int ID,string NewCategoryName)
         {
             OracleCommand command = new OracleCommand();

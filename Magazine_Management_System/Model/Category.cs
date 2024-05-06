@@ -10,8 +10,9 @@ namespace Magazine_Management_System.Model
     {
         public int Id;
         public string Name;
-        public Category(string name)
+        public Category(int ID,string name)
         {
+            Id = ID;
             Name = name;
         }
     }

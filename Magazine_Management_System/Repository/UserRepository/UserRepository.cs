@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Oracle.DataAccess.Types;
 
 
 namespace Magazine_Management_System.Repository.UserRepository
@@ -104,7 +105,9 @@ namespace Magazine_Management_System.Repository.UserRepository
                 string email = command.Parameters["email_out"].Value.ToString();
                 string password = command.Parameters["password_out"].Value.ToString();
                 string role = command.Parameters["role_out"].Value.ToString();
-                return new User(email, username, password, role);
+                User user = new User(email, username, password, role);
+                user.Id = ID;
+                return user;
 
             }catch(Exception ex)
             {
@@ -112,6 +115,46 @@ namespace Magazine_Management_System.Repository.UserRepository
             }
             
         }
+
+        public User GetUserByCredentials(string email,string password)
+        {
+            //make the stored procedure and read the id of the user as output parameter if found
+
+            //if not found return null
+            OracleCommand command = new OracleCommand();
+            command.Connection = this.conn;
+            command.CommandText = "get_user_by_email_password";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("email_in", email);
+            command.Parameters.Add("password_in", password);
+            command.Parameters.Add("id_out", OracleDbType.Int32).Direction = ParameterDirection.Output;
+            try
+            {
+                command.ExecuteNonQuery();
+                OracleParameter idOutParam = (OracleParameter)command.Parameters["id_out"];
+                OracleDecimal returnedVal = (OracleDecimal)idOutParam.Value.ToString();
+
+                // Check if the returned value is not null and not DBNull
+                if (returnedVal != null && !returnedVal.IsNull)
+                {
+                    // Convert OracleDecimal to int
+                    int ID = returnedVal.ToInt32();
+                    return GetUserByID(ID);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occurred: " + ex.Message);
+                return null;
+            }
+
+
+        }
+
         public bool DeleteUser(int ID)
         {
             OracleCommand command = new OracleCommand();

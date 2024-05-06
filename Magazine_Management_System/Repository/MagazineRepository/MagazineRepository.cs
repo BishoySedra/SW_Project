@@ -105,6 +105,36 @@ namespace Magazine_Management_System.Repository.MagazineRepository
             }
         }
 
+        public List<Magazine> GetAllMagazines()
+        {
+            //get all magazines stored procedure cursor 
+            OracleCommand command = new OracleCommand();
+            try
+            {
+                command.Connection = this.conn;
+                command.CommandText = "get_all_magazines";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("Magazines", OracleDbType.RefCursor, ParameterDirection.Output);
+                OracleDataReader reader = command.ExecuteReader();
+                List<Magazine> magazines = new List<Magazine>();
+                while (reader.Read())
+                {
+                    Magazine magazine = new Magazine();
+                    magazine.Id = Convert.ToInt32(reader["ID"]);
+                    magazine.Name = reader["Name"].ToString();
+                    magazine.Admin_Id = Convert.ToInt32(reader["Admin_Id"]);
+                    magazine.PublicationDate = (OracleDate)reader.GetDateTime(reader.GetOrdinal("Publication_Date"));
+                    magazines.Add(magazine);
+                }
+                return magazines;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public List<Article> GetArticles(int MagazineID)
         {
             OracleCommand command = new OracleCommand();

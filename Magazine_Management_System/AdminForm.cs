@@ -18,12 +18,16 @@ namespace Magazine_Management_System
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+
+        int AdminID;
+        public AdminForm(int ID)
         {
             InitializeComponent();
-            
+            this.AdminID = ID;
 
         }
+        MagazineRepository magazineRepository = new MagazineRepository();
+
         ArticleRepository articleRepository = new ArticleRepository();
         private void button1_Click(object sender, EventArgs e)
         {
@@ -33,11 +37,27 @@ namespace Magazine_Management_System
         private void button2_Click(object sender, EventArgs e)
         {
             articleRepository.UpdateMagazineArticlesDisconnectedLayer();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void createMagazineButton_Click(object sender, EventArgs e)
+        {
+            string MagazineName = magazineName.Text;
+            int ID = magazineRepository.SaveMagazine(MagazineName, AdminID, new OracleDate(DateTime.Now));
+            if(ID != -1)
+            {
+                MessageBox.Show("Magazine Created Successfully with id: " + ID);
+            }
+            else
+            {
+                MessageBox.Show("Magazine Creation Failed");
+            }
+        }
+
     }
 }
