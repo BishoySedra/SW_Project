@@ -1,7 +1,7 @@
 ﻿
 namespace Magazine_Management_System
 {
-    partial class Report1
+    partial class ArticleForm
     {
         /// <summary>
         /// Required designer variable.
@@ -117,7 +117,7 @@ namespace Magazine_Management_System
             this.crystalReportViewer1.Size = new System.Drawing.Size(1407, 451);
             this.crystalReportViewer1.TabIndex = 7;
             // 
-            // Report1
+            // ArticleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,8 +130,8 @@ namespace Magazine_Management_System
             this.Controls.Add(this.magazine_cmb);
             this.Controls.Add(this.category_cmb);
             this.Controls.Add(this.GenerateReport_btn);
-            this.Name = "Report1";
-            this.Text = "Form3";
+            this.Name = "ArticleForm";
+            this.Text = "Aticle Status";
             this.Load += new System.EventHandler(this.Report1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -33,16 +33,23 @@ namespace Magazine_Management_System
                 if(user.Role.Equals("ADMIN"))
                 {
                     AdminForm form1 = new AdminForm(user.Id);
+                    this.Hide();
+                    form1.FormClosed += AdminFormClosed;
                     form1.Show();
+
                 }
                 else if (user.Role.Equals("AUTHOR"))
                 {
                     AuthorForm form = new AuthorForm(user.Id);
+                    this.Hide();
+                    form.FormClosed += AuthorFormClosed;
                     form.Show();
                 }
                 else if(user.Role.Equals("READER"))
                 {
                     SubscriptionForm form = new SubscriptionForm(user.Id);
+                    this.Hide();
+                    form.FormClosed += ReaderFormClosed;
                     form.Show();
                 }
                 else
@@ -52,6 +59,31 @@ namespace Magazine_Management_System
             }
             else
                 MessageBox.Show("Login Failed");
+
+        }
+
+        private void AdminFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void AuthorFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void ReaderFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void email_tb_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

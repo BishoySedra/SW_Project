@@ -59,5 +59,30 @@ namespace Magazine_Management_System
             }
         }
 
+        private void articleReport_btn_Click(object sender, EventArgs e)
+        {
+            ArticleForm articleForm = new ArticleForm();
+            this.Hide();
+            articleForm.FormClosed += ArticleFormClosed;
+            articleForm.Show();
+        }
+
+        private void ArticleFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void subscriptionReport_btn_Click(object sender, EventArgs e)
+        {
+            SubscriptionStatusForm subscriptionStatusForm = new SubscriptionStatusForm();
+            this.Hide();
+            subscriptionStatusForm.FormClosed += SubscriptionStatusFormClosed;
+            subscriptionStatusForm.Show();
+        }
+
+        private void SubscriptionStatusFormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
     }
 }

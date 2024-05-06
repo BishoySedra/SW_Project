@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace Magazine_Management_System
 {
-    public partial class Report1 : Form
+    public partial class ArticleForm : Form
     {
         CrystalReport2 CR;
-        public Report1()
+        public ArticleForm()
         {
             InitializeComponent();
         }

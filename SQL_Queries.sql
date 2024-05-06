@@ -1,3 +1,4 @@
+--------------------
 ------ TABLES ------
 --------------------
 
@@ -67,16 +68,19 @@ CREATE TABLE SUBSCRIPTIONS (
     FOREIGN KEY (magazine_id) REFERENCES MAGAZINES(id)
 );
 
+------------------------------
 --------- SEQUENCES ----------
 ------------------------------
+
 -- Create sequences
 CREATE SEQUENCE user_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE article_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE magazine_seq START WITH 1 INCREMENT BY 1;
 
-
+--------------------------
 -------- TRIGGERS --------
+--------------------------
 
 -- Trigger for USERS table
 CREATE OR REPLACE TRIGGER user_trigger
@@ -115,7 +119,7 @@ END;
 /
 
 -----------------------------
-------- MAGAZINE SHIT -------
+---- MAGAZINE PROCEDURES ----
 -----------------------------
 
 -- Create procedure for inserting a new magazine
@@ -169,9 +173,68 @@ BEGIN
 END get_magazine;
 /
 
+CREATE OR REPLACE PROCEDURE get_all_magazines(
+    magazine_cursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN magazine_cursor FOR
+        SELECT *
+        FROM MAGAZINES;
+END get_all_magazines;
+/
+CREATE OR REPLACE PROCEDURE get_all_other_magazines (
+    p_reader_id IN NUMBER,
+    magazines_cursor OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN magazines_cursor FOR
+        SELECT ID, NAME, ADMIN_ID, PUBLICATION_DATE
+        FROM MAGAZINES
+        WHERE ID NOT IN (
+            SELECT MAGAZINE_ID
+            FROM SUBSCRIPTIONS
+            WHERE READER_ID = p_reader_id
+        );
+END get_all_other_magazines;
+/
+
+CREATE OR REPLACE PROCEDURE get_all_my_magazines (
+    p_reader_id IN NUMBER,
+    magazines_cursor OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN magazines_cursor FOR
+        SELECT ID, NAME, ADMIN_ID, PUBLICATION_DATE
+        FROM MAGAZINES
+        WHERE ID IN (
+            SELECT MAGAZINE_ID
+            FROM SUBSCRIPTIONS
+            WHERE READER_ID = p_reader_id
+        );
+END get_all_my_magazines;
+/
+
+
+CREATE OR REPLACE PROCEDURE get_all_my_magazines_articles (
+    p_reader_id IN NUMBER,
+    articles_cursor OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN articles_cursor FOR
+        SELECT a.ID, a.TITLE, a.MAGAZINE_ID, a.CONTENT
+        FROM ARTICLES a
+        WHERE a.MAGAZINE_ID IN (
+            SELECT s.MAGAZINE_ID
+            FROM SUBSCRIPTIONS s
+            WHERE s.READER_ID = p_reader_id
+        ) AND a.STATUS != 'PENDING'; -- corrected the condition here
+END get_all_my_magazines_articles;
+/
+
 
 --------------------------------
---------- ARTICLE SHIT ---------
+------ ARTICLE PROCEDURES ------
 --------------------------------
 
 CREATE OR REPLACE PROCEDURE insert_article(
@@ -261,9 +324,9 @@ END get_articles_by_magazine;
 /
 
 
-----------------------------------
---------- CATEGORY SHIT ----------
-----------------------------------
+-----------------------------------
+------- CATEGORY PROCEDURES -------
+-----------------------------------
 
 
 -- Create procedure for inserting a new category
@@ -275,6 +338,17 @@ BEGIN
     VALUES (category_seq.nextval, name_in);
     COMMIT;
 END insert_category;
+/
+
+CREATE OR REPLACE PROCEDURE get_all_categories(
+    category_cursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN category_cursor FOR
+        SELECT Id, Name
+        FROM categories;
+END get_all_categories;
 /
 
 -- Create procedure for updating category information
@@ -314,9 +388,9 @@ END get_category;
 /
 
 
-----------------------------------
-------- SUBSCRIPTION SHIT --------
-----------------------------------
+-----------------------------------
+----- SUBSCRIPTION PROCEDURES -----
+-----------------------------------
 
 -- Create procedure for inserting a new subscription
 CREATE OR REPLACE PROCEDURE insert_subscription(
@@ -351,6 +425,58 @@ BEGIN
 END update_subscription;
 /
 
+CREATE OR REPLACE PROCEDURE get_subscribed_magazines(
+    reader_id_in IN NUMBER,
+    magazine_cursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN magazine_cursor FOR
+        SELECT m.Id, m.Name, m.Admin_Id, m.Publication_Date
+        FROM Subscriptions s
+        JOIN Magazines m ON s.Magazine_Id = m.Id
+        WHERE s.Reader_Id = reader_id_in;
+END get_subscribed_magazines;
+/
+
+CREATE OR REPLACE PROCEDURE get_not_subscribed_magazines(
+    reader_id_in IN NUMBER,
+    magazine_cursor OUT SYS_REFCURSOR
+)
+AS 
+BEGIN
+    OPEN magazine_cursor FOR
+        SELECT Id, Name, Admin_Id, Publication_Date
+        FROM Magazines
+        WHERE Id NOT IN (
+            SELECT Magazine_Id
+            FROM Subscriptions
+            WHERE Reader_Id = reader_id_in
+        );
+END get_not_subscribed_magazines;
+/
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE get_subscribed_articles(
+    reader_id_in IN NUMBER,
+    article_cursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN article_cursor FOR
+        SELECT a.Id, a.Title, a.Content, a.Magazine_Id, a.Author_Id
+        FROM Articles a
+        JOIN Subscriptions s ON a.Magazine_Id = s.Magazine_Id
+        WHERE s.Reader_Id = reader_id_in;
+END get_subscribed_articles;
+/
+
+
+
+
 -- Create procedure for deleting a subscription
 CREATE OR REPLACE PROCEDURE delete_subscription(
     reader_id_in IN NUMBER,
@@ -379,7 +505,7 @@ END get_subscription;
 
 
 -------------------------------
----------- USER SHIT ----------
+------- USER PROCEDURES -------
 -------------------------------
 
 -- Create procedure for inserting a new user
@@ -429,136 +555,34 @@ END delete_user;
 -- Create procedure for retrieving user information
 CREATE OR REPLACE PROCEDURE get_user(
     id_in IN NUMBER,
-    user_out OUT SYS_REFCURSOR
+    username_out OUT VARCHAR2,
+    email_out OUT VARCHAR2,
+    password_out OUT VARCHAR2,
+    role_out OUT VARCHAR2
 ) AS
 BEGIN
-    OPEN user_out FOR
-    SELECT * FROM USERS
+    SELECT username, email, password, role 
+    INTO username_out, email_out, password_out, role_out 
+    FROM USERS
     WHERE id = id_in;
 END get_user;
 /
 
 
---------------------------
------ INSERTING SHIT -----
---------------------------
-
--- Inserting users
-INSERT INTO "USERS" (email, username, password, role)
-VALUES ('admin@example.com', 'admin_user', 'adminpass', 'ADMIN');
-
-INSERT INTO "USERS" (email, username, password, role)
-VALUES ('author1@example.com', 'author_one', 'authorpass', 'AUTHOR');
-
-INSERT INTO "USERS" (email, username, password, role)
-VALUES ('reader1@example.com', 'reader_one', 'readerpass', 'READER');
-
-INSERT INTO USERS (email, username, password, role)
-VALUES ('author2@example.com', 'author_two', 'authorpass', 'AUTHOR');
-
-INSERT INTO USERS (email, username, password, role)
-VALUES ('reader2@example.com', 'reader_two', 'readerpass', 'READER');
-
-
-
--- Inserting categories
-INSERT INTO CATEGORIES (name)
-VALUES ('Technology');
-
-INSERT INTO CATEGORIES (name)
-VALUES ('Science');
-
-INSERT INTO CATEGORIES (name)
-VALUES ('Fashion');
-
-INSERT INTO CATEGORIES (name)
-VALUES ('Health');
-
-INSERT INTO CATEGORIES (name)
-VALUES ('Travel');
-
-
--- Inserting articles
-DECLARE
-    v_title VARCHAR2(255) := 'New Trends in Technology';
-    v_magazine_id NUMBER := 1; -- Assuming the magazine ID where the article belongs
-    v_author_id NUMBER := 2;   -- Assuming the author ID who wrote the article
-    v_category_id NUMBER := 1; -- Assuming the category ID of the article
-    v_content VARCHAR2(4000) := 'This article explores emerging trends in technology.';
-BEGIN
-    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
-    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
-EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
-END;
 /
-
-DECLARE
-    v_title VARCHAR2(255) := 'Space Exploration: The Next Frontier';
-    v_magazine_id NUMBER := 2; -- Assuming the magazine ID where the article belongs
-    v_author_id NUMBER := 2;   -- Assuming the author ID who wrote the article
-    v_category_id NUMBER := 2; -- Assuming the category ID of the article
-    v_content VARCHAR2(4000) := 'This article delves into the future of space exploration.';
+CREATE OR REPLACE PROCEDURE get_user_by_email_password(
+    email_in IN VARCHAR2,
+    password_in IN VARCHAR2,
+    id_out OUT NUMBER
+) AS
+    user_id NUMBER;
 BEGIN
-    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
-    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
-EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
-END;
+    SELECT id INTO user_id
+    FROM USERS
+    WHERE email = email_in
+    AND password = password_in;
+    
+    id_out := user_id;
+END get_user_by_email_password;
 /
-
-DECLARE
-    v_title VARCHAR2(255) := 'Healthy Eating Habits';
-    v_magazine_id NUMBER := 1; -- Assuming the magazine ID where the article belongs
-    v_author_id NUMBER := 7;   -- Assuming the author ID who wrote the article
-    v_category_id NUMBER := 4; -- Assuming the category ID of the article
-    v_content VARCHAR2(4000) := 'This article discusses the importance of healthy eating.';
-BEGIN
-    insert_article(v_title, v_magazine_id, v_author_id, v_category_id, v_content);
-    DBMS_OUTPUT.PUT_LINE('Article inserted successfully.');
-EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inserting article: ' || SQLERRM);
-END;
-/
-
-
--- Inserting magazines
-INSERT INTO MAGAZINES (name, admin_id, publication_date)
-VALUES ('Tech Insider', 1, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
-
-INSERT INTO MAGAZINES (name, admin_id, publication_date)
-VALUES ('Science Today', 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'));
-
-INSERT INTO MAGAZINES (name, admin_id, publication_date)
-VALUES ('Health and Wellness', 1, TO_DATE('2024-04-15', 'YYYY-MM-DD'));
-
-INSERT INTO MAGAZINES (name, admin_id, publication_date)
-VALUES ('Travel Journal', 1, TO_DATE('2024-05-10', 'YYYY-MM-DD'));
-
-
--- Linking articles to magazines
-INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
-VALUES (1, 1);
-
-INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
-VALUES (1, 2);
-
-INSERT INTO MAGAZINE_ARTICLES (magazine_id, article_id)
-VALUES (4, 3);
-
-
--- Inserting subscriptions
-INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
-VALUES (3, 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
-
-
-INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
-VALUES (8, 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
-
-INSERT INTO SUBSCRIPTIONS (reader_id, magazine_id, start_date, end_date)
-VALUES (6, 2, TO_DATE('2024-05-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'));
-
 

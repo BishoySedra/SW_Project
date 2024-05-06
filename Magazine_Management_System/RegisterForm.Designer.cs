@@ -128,7 +128,7 @@ namespace Magazine_Management_System
             this.role_cmb.TabIndex = 9;
             this.role_cmb.SelectedIndexChanged += new System.EventHandler(this.role_cmb_SelectedIndexChanged);
             // 
-            // Form2
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -142,8 +142,8 @@ namespace Magazine_Management_System
             this.Controls.Add(this.password_tb);
             this.Controls.Add(this.email_tb);
             this.Controls.Add(this.username_tb);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "RegisterForm";
+            this.Text = "Register";
             this.ResumeLayout(false);
             this.PerformLayout();
 

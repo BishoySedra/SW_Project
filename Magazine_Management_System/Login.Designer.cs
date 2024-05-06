@@ -39,7 +39,7 @@
             // 
             this.password_label.AutoSize = true;
             this.password_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password_label.Location = new System.Drawing.Point(236, 248);
+            this.password_label.Location = new System.Drawing.Point(489, 232);
             this.password_label.Name = "password_label";
             this.password_label.Size = new System.Drawing.Size(78, 20);
             this.password_label.TabIndex = 10;
@@ -49,7 +49,7 @@
             // 
             this.email_label.AutoSize = true;
             this.email_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.email_label.Location = new System.Drawing.Point(251, 180);
+            this.email_label.Location = new System.Drawing.Point(504, 164);
             this.email_label.Name = "email_label";
             this.email_label.Size = new System.Drawing.Size(48, 20);
             this.email_label.TabIndex = 9;
@@ -57,22 +57,23 @@
             // 
             // password_tb
             // 
-            this.password_tb.Location = new System.Drawing.Point(363, 250);
+            this.password_tb.Location = new System.Drawing.Point(616, 234);
             this.password_tb.Name = "password_tb";
             this.password_tb.Size = new System.Drawing.Size(202, 20);
             this.password_tb.TabIndex = 8;
             // 
             // email_tb
             // 
-            this.email_tb.Location = new System.Drawing.Point(363, 180);
+            this.email_tb.Location = new System.Drawing.Point(616, 164);
             this.email_tb.Name = "email_tb";
             this.email_tb.Size = new System.Drawing.Size(202, 20);
             this.email_tb.TabIndex = 7;
+            this.email_tb.TextChanged += new System.EventHandler(this.email_tb_TextChanged);
             // 
             // loginButton
             // 
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(269, 336);
+            this.loginButton.Location = new System.Drawing.Point(522, 320);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(287, 51);
             this.loginButton.TabIndex = 11;
@@ -84,7 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1315, 570);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.password_label);
             this.Controls.Add(this.email_label);
@@ -92,6 +93,7 @@
             this.Controls.Add(this.email_tb);
             this.Name = "Login";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

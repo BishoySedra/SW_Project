@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,18 @@
     </Compile>
     <Compile Include="AuthorForm.Designer.cs">
       <DependentUpon>AuthorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubscriptionStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionStatusForm.Designer.cs">
+      <DependentUpon>SubscriptionStatusForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RegisterForm.cs">
       <SubType>Form</SubType>
@@ -94,11 +107,11 @@
       <DependentUpon>CrystalReport3.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report1.cs">
+    <Compile Include="ArticleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report1.Designer.cs">
-      <DependentUpon>Report1.cs</DependentUpon>
+    <Compile Include="ArticleForm.Designer.cs">
+      <DependentUpon>ArticleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Category.cs" />
@@ -119,6 +132,9 @@
     <Compile Include="SubscriptionForm.Designer.cs">
       <DependentUpon>SubscriptionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ArticleForm.resx">
+      <DependentUpon>ArticleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CrystalReport2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
@@ -132,6 +148,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AuthorForm.resx">
       <DependentUpon>AuthorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubscriptionStatusForm.resx">
+      <DependentUpon>SubscriptionStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
@@ -164,6 +186,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
