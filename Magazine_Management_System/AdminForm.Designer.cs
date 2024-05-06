@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -130,10 +131,12 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox magazineName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button3;
+
     }
 }
 

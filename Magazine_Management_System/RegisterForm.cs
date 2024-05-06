@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,3 +61,4 @@ namespace Magazine_Management_System
         }
     }
 }
+

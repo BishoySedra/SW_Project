@@ -18,6 +18,7 @@ namespace Magazine_Management_System
 {
     public partial class AdminForm : Form
     {
+
         int AdminID;
         public AdminForm(int ID)
         {
@@ -26,6 +27,7 @@ namespace Magazine_Management_System
 
         }
         MagazineRepository magazineRepository = new MagazineRepository();
+
         ArticleRepository articleRepository = new ArticleRepository();
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,6 +37,7 @@ namespace Magazine_Management_System
         private void button2_Click(object sender, EventArgs e)
         {
             articleRepository.UpdateMagazineArticlesDisconnectedLayer();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,5 +58,6 @@ namespace Magazine_Management_System
                 MessageBox.Show("Magazine Creation Failed");
             }
         }
+
     }
 }
