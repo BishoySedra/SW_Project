@@ -29,15 +29,22 @@ namespace Magazine_Management_System
         private void AuthorForm_Load(object sender, EventArgs e)
         {
             List<Magazine> magazines = magazineRepository.GetAllMagazines();
-            foreach (Magazine magazine in magazines)
+            if (magazines != null)
             {
-                magazineComboBox.Items.Add(magazine.Id + " " + magazine.Name);
+                foreach (Magazine magazine in magazines)
+                {
+                    magazineComboBox.Items.Add(magazine.Id + " " + magazine.Name);
+                }
             }
             List<Category> categories = categoryRepository.GetAllCategories();
-            foreach(Category category in categories)
+            if (categories != null)
             {
-                categoryComboBox.Items.Add(category.Id + " " + category.Name);
+                foreach (Category category in categories)
+                {
+                    categoryComboBox.Items.Add(category.Id + " " + category.Name);
+                }
             }
+
         }
 
         private void publishArticle_Click(object sender, EventArgs e)
