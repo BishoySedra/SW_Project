@@ -1,9 +1,27 @@
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe.config
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\bin\Debug\Magazine_Management_System.pdb
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.AssemblyReference.cache
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.Properties.Resources.resources
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.GenerateResource.cache
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CoreCompileInputs.cache
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
-D:\Study\Third Year\Semester 6\Software Engineering\Project\MS2\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
+E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe.config
+E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe
+E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.pdb
+E:\Software Engineering\SW_Project\Magazine_Management_System\bin\Debug\Oracle.DataAccess.dll
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.AssemblyReference.cache
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Properties.Resources.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.GenerateResource.cache
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CoreCompileInputs.cache
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CopyComplete
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe.config
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.exe
+Z:\SW_Project\Magazine_Management_System\bin\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.AssemblyReference.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form1.resources
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Properties.Resources.resources
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.GenerateResource.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.csproj.CoreCompileInputs.cache
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.exe
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.pdb
+Z:\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Form2.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.Login.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.AdminForm.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.RegisterForm.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.AuthorForm.resources
+E:\Software Engineering\SW_Project\Magazine_Management_System\obj\Debug\Magazine_Management_System.SubscriptionForm.resources
